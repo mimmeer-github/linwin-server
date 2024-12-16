@@ -35,14 +35,30 @@ linwin-server
 
 ### Example - APT - Files
 
+There are 3 types of a LinWin package:
+- WINGET -- You supply the WinGet package ID (can be for MS-Store for just for WinGet: e.g Scratch 3, MS-Store: `9PFGJ25JL6X3`, WinGet: `MITMediaLab.Scratch.3`).
+- LINUX -- You supply the APT package name.
+- CUSTOM -- You must supply the URL for a Windows EXE/BATCH and the switches for uninstallation and installation (both silent).
+
 Example software: Scratch 3
 
-install.linwin:
+install.linwin (Windows/WSL):
 ```
 -/ LinWin Install info \-
 -/ This is a comment \-
 
 PACKAGE-NAME: MITMediaLab.Scratch.3
+```
+
+install.linwin (Custom):
+```
+-/ LinWin Install info \-
+-/ This is a comment \-
+
+PACKAGE-URL: https://downloads.scratch.mit.edu/desktop/Scratch%20Setup.exe
+ARGS: /allusers /S
+UNINST-URL: https://downloads.scratch.mit.edu/desktop/Scratch%20Setup.exe
+UNINST-ARGS: /S
 ```
 
 metadata.meta:
@@ -51,6 +67,11 @@ metadata.meta:
 
 NAME: Scratch 3
 LATEST-VERSION: 3.29.1
+
+-/ LinWin info \-
+
+TYPE: WINGET
+-/ Could also be "LINUX" or "CUSTOM" \-
 ```
 
 version-meta.meta:
